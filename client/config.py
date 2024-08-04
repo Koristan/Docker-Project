@@ -1,0 +1,2 @@
+BOT_TOKEN = "7290765064:AAGi1zrDVmwmj4h2PR83Iy9En2u7NEbD8IM"
+BASE_URL = "http://localhost:1234"

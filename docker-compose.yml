@@ -1,0 +1,47 @@
+version: "3.9"
+
+services:
+
+  mongo:
+    image: mongo
+    environment:
+            - MONGO_INITDB_ROOT_USERNAME=user
+            - MONGO_INITDB_ROOT_PASSWORD=user
+            - MONGO_INITDB_DATABASE=messages_db
+
+  mongo-express:
+   image: mongo-express
+   environment:
+       - ME_CONFIG_MONGODB_SERVER=mongo
+       - ME_CONFIG_MONGODB_PORT=27017
+       - ME_CONFIG_MONGODB_ENABLE_ADMIN=false
+       - ME_CONFIG_MONGODB_AUTH_DATABASE=admin
+       - ME_CONFIG_MONGODB_AUTH_USERNAME=user
+       - ME_CONFIG_MONGODB_AUTH_PASSWORD=user
+       - ME_CONFIG_BASICAUTH_USERNAME=user1
+       - ME_CONFIG_BASICAUTH_PASSWORD=user1
+   depends_on:
+       - mongo
+   ports:
+     - "8888:8081"
+
+
+  server:
+
+    build: server/
+
+    command: uvicorn main:app --reload --host=0.0.0.0 --port=1234
+
+    ports:
+      - 1234:1234
+
+  client:
+
+    build: client/
+ 
+    command: python ./main.py
+
+    network_mode: host
+ 
+    depends_on:
+      - server
