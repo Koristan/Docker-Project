@@ -8,6 +8,7 @@ git clone https://github.com/Koristan/Docker-Project.git
 ```
 ## 2. После клонирования репозитория зайдите в корень проекта и запустите докер!
 ```cmd
+cd Docker-Project
 docker-compose build
 ```
 После небольшого промежутка времени докер будет готов к работе и его можно будет запускать!
